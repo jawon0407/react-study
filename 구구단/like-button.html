@@ -13,25 +13,81 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script type="text/babel">
    'use strict';
-
-    function LikeButton(){ // 함수 컴포넌트
-        const [liked,setLiked] = React.useState(false);
-        if(liked){
-            return 'You liked this';
+    class GuGuDan extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                firstNum : Math.ceil(Math.random() * 9),
+                secondNum : Math.ceil(Math.random() * 9),
+                value : '',
+                result : '',
+                answer: '',
+                hint :'정답 보기',
+            }
         }
-        return (
-            <button onClick = {()=>{setLiked(true)}} >
-                Like
-            </button>
-        )
+        onSubmit = (e) => {
+            e.preventDefault();
+            if(parseInt(this.state.value) === this.state.firstNum * this.state.secondNum){
+                this.setState((prevState) => {
+                    return{
+                        result : '정답 : ' + prevState.value,
+                        firstNum : Math.ceil(Math.random() * 9),
+                        secondNum : Math.ceil(Math.random() * 9),
+                        value : '',
+                        answer: '',
+                        hint :'정답 보기',
+                    }
+                })}else{
+                    this.setState({
+                    result : '땡',
+                    value : '',
+                })
+                this.hello.focus();
+            };
+        }
+
+        onChange = (e) => {
+            this.setState({value : e.target.value});
+        }
+
+        onClick = (e) => {
+            e.preventDefault();
+            this.state.answer === '' ? this.setState({
+                answer : this.state.firstNum * this.state.secondNum,
+                hint : '정답 숨기기',
+            }) : this.setState({
+                answer : '',
+                hint : '정답 보기',
+            })
+        }
+
+        refFunc = (c)=>{this.hello = c}
+
+        hello;
+
+        render(){
+            console.log('rendering');
+            return(
+                <React.Fragment>
+                    <div>{this.state.firstNum} 곱하기 {this.state.secondNum}는?</div>
+                    <form onSubmit={this.onSubmit}>
+                        <input ref={this.refFunc} type="number" id="input_num" value={this.state.value} onChange={this.onChange}/>
+                        <button>입력</button>
+                    </form>
+                    <div>{this.state.result}</div>
+                    <div>
+                        <button id="answerBtn" onClick = {this.onClick}>{this.state.hint}</button>
+                        <span className="answerText">{this.state.answer}</span>
+                    </div>
+                </React.Fragment>
+            )
+        }
     }
 </script>
 <script type="text/babel">
     // ReactDOM.render(<LikeButton/>,document.querySelector('#root'));
     ReactDOM.createRoot(document.querySelector('#root')).render(
-        <div>
-            <LikeButton/>
-        </div>
+        <GuGuDan/>
     );
 </script>
 </body>
