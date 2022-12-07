@@ -7,9 +7,7 @@
 </head>
 <body class="w-full h-full flex items-center justify-center bg-gray-200">
 <div id="root" class="bg-white"></div>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="./dist/app.js"></script>
 <!-- <script type="text/babel">
    'use strict';
     class GuGuDan extends React.Component{
@@ -83,7 +81,7 @@
         }
     }
 </script> -->
-<script type="text/babel">
+<!-- <script type="text/babel">
     const GuGuDan = () => {
         const [first,setFirst] = React.useState(Math.ceil(Math.random()*100)); // first 의 초기값 세팅
         const [second,setSecond] = React.useState(Math.ceil(Math.random()*100)); // second 의 초기값 세팅
@@ -166,12 +164,6 @@
             </div>
         )
     }
-</script>
-<script type="text/babel">
-    // ReactDOM.render(<LikeButton/>,document.querySelector('#root'));
-    ReactDOM.createRoot(document.querySelector('#root')).render(
-        <GuGuDan/>
-    );
-</script>
+</script> -->
 </body>
 </html>
