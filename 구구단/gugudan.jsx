@@ -1,14 +1,14 @@
 const React = require('react');
-
+const {useState , useRef} = React;
 const GuGuDan = () => {
-    const [first,setFirst] = React.useState(Math.ceil(Math.random()*100)); // first 의 초기값 세팅
-    const [second,setSecond] = React.useState(Math.ceil(Math.random()*100)); // second 의 초기값 세팅
-    const [value,setValue] = React.useState(''); // value 의 초기값 세팅
-    const [result,setResult] = React.useState(''); // result 의 초기값 세팅
-    const [resulted, setResulted] = React.useState(''); // resulted 의 초기값 세팅
-    const [answer,setAnswer] = React.useState('정답 보기'); // answer 의 초기값 세팅
-    const [hint,setHint] = React.useState(''); // hint 의 초기값 세팅
-    const refFunc = React.useRef(''); //react hooks 에서 ref 쓰는 방법
+    const [first,setFirst] = useState(Math.ceil(Math.random()*100)); // first 의 초기값 세팅
+    const [second,setSecond] = useState(Math.ceil(Math.random()*100)); // second 의 초기값 세팅
+    const [value,setValue] = useState(''); // value 의 초기값 세팅
+    const [result,setResult] = useState(''); // result 의 초기값 세팅
+    const [resulted, setResulted] = useState(''); // resulted 의 초기값 세팅
+    const [answer,setAnswer] = useState('정답 보기'); // answer 의 초기값 세팅
+    const [hint,setHint] = useState(''); // hint 의 초기값 세팅
+    const refFunc = useRef(''); //react hooks 에서 ref 쓰는 방법
     const onSubmit = (e) => {
         e.preventDefault();
         if(parseInt(value) === first * second){
@@ -61,7 +61,7 @@ const GuGuDan = () => {
     }
     
     return(
-        <div className ="flex flex-col items-center justify-center p-20 shadow-md rounded-lg">
+        <div className ="bg-white flex flex-col items-center justify-center p-20 shadow-md rounded-lg ">
             <div>{first} 곱하기 {second}</div>
             <form onSubmit={onSubmit} className="my-5">
                 <input ref={refFunc} onChange={onChange} type="number" value={value} className="border p-2 outline-1 outline-blue-400"/> 
