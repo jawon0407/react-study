@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "dev"
+    "dev" : "webpack serve --env development"
   },
   "author": "jawon0407",
   "license": "ISC",
@@ -12,9 +12,12 @@
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "babel-loader": "^9.1.0",
+    "react-refresh": "^0.14.0",
     "webpack": "^5.64.4",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "react": "^18.2.0",
