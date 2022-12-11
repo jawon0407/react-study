@@ -61,25 +61,30 @@ const GuGuDan = () => {
     }
     
     return(
-        <div className ="bg-white flex flex-col items-center justify-center p-20 shadow-md rounded-lg ">
-            <div>{first} 곱하기 {second}</div>
-            <form onSubmit={onSubmit} className="my-5">
-                <input ref={refFunc} onChange={onChange} type="number" value={value} className="border p-2 outline-1 outline-blue-400"/> 
-                <div className="flex items-center justify-around mt-4">
-                    <button className="bg-blue-300 text-white p-2 rounded-lg">입력</button>
-                    <button className="bg-red-400 text-white p-2 rounded-lg" onClick={onSkipClick}>Skip</button>
-                    <button className="bg-gray-200 px-4 py-2 rounded-lg" onClick={onReset}>C</button>
+        <>
+            <div className ="bg-white flex flex-col items-center justify-center p-20 shadow-md rounded-lg ">
+                <div>{first} 곱하기 {second}</div>
+                <form onSubmit={onSubmit} className="my-5">
+                    <input ref={refFunc} onChange={onChange} type="number" value={value} className="border p-2 outline-1 outline-blue-400"/> 
+                    <div className="flex items-center justify-around mt-4">
+                        <button className="bg-blue-300 text-white p-2 rounded-lg">입력</button>
+                        <button className="bg-red-400 text-white p-2 rounded-lg" onClick={onSkipClick}>Skip</button>
+                        <button className="bg-gray-200 px-4 py-2 rounded-lg" onClick={onReset}>C</button>
+                    </div>
+                </form> 
+                <div>{result}</div>
+                <div className="my-3">{resulted}</div>
+                <div>
+                    <button onClick = {onClick} className="border-2 rounded-lg px-2 py-1">{answer}</button>
+                    <div className="text-center">
+                        <span>{hint}</span>
+                    </div>
                 </div>
-            </form> 
-            <div>{result}</div>
-            <div className="my-3">{resulted}</div>
-            <div>
-                <button onClick = {onClick} className="border-2 rounded-lg px-2 py-1">{answer}</button>
-                <div className="text-center">
-                    <span>{hint}</span>
+                <div>
+                    {first} x {second}
                 </div>
             </div>
-        </div>
+        </>  
     )
 }
 

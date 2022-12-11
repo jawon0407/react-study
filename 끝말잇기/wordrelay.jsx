@@ -19,7 +19,6 @@ const WordRelay = () => {
         //     setHint('이전 단어들 보기');
         //     setPrevWords('');
         // }
-        
         setHint(hint === '이전 단어 보기' ? '이전 단어 숨기기' : '이전 단어 보기');
         setPrevWords(prevWords => prevWords ? '' : firstWord); 
     }
@@ -29,11 +28,6 @@ const WordRelay = () => {
         if(firstWord[firstWord.length -1] === value[0]){
             setHint('이전 단어 보기');
             setFirstWord(value);
-            setPrevWords(() => {
-                useState(prevWords => {
-                    state.prevFirstWord
-                })
-            });
             setValue('');
             setResult('정답');
         }else{
