@@ -2,47 +2,46 @@ const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name : 'numberbaseball-setting',
+    name : 'numberBaseballGame-setting',
     mode : 'development', // 실서비스 : production
-    devtools : 'eval',
+    devtool : 'eval',
     resolve : {
-        extensions : ['.js', '.jsx']],
-    },
-    entry : {
+        extensions : ['.js', '.jsx']
+    },    
+    entry :{
         app : './client',
-    },
+    }, // 입력
     module : {
-        rules: [{
+        rules : [{
             test : /\.jsx?/,
             loader : 'babel-loader',
             options : {
-                presets : [
-                    ['@babel/preset-env',{
-                        targets : { 
-                            browsers : ['> 1% in KR', 'last 2 chrome versions'],
+                presets : [['@babel/preset-env',{
+                    targets : {
+                        browsers : ['> 1% in KR', 'last 2 chrome versions'],
                         },
-                        debug : true,
+                    debug : true,
                     }],
-                    '@babel/preset-react',
-                ],
+                '@babel/preset-react'],
                 plugins : [
-                    'react-refresh/babel',
+                    'react-refresh/babel'
                 ],
-                excludes : path.join(__dirname, 'node_modules'),
             },
-        }]
-    },
+            exclude : path.join(__dirname, 'node_modules'),
+        }],
+    }, // 모듈 처리 방식
+
     plugins : [
         new RefreshWebpackPlugin(),
     ],
-    output : {
+    output:{
         path : path.join(__dirname, 'dist'),
         filename : '[name].js',
         publicPath : '/dist',
-    },
+    }, // 출력
     devServer : {
         devMiddleware : {publicPath : '/dist'},
-        static : {directory : path.resolve(__dirname)},
+        static:{directory: path.resolve(__dirname)},
         hot : true,
     },
-}
+};
