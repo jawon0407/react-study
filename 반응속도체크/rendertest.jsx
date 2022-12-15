@@ -1,39 +1,75 @@
-import React, { PureComponent } from "react";
-/* 
-    PureCompoenet는 state, props가 변경될 때 인지하고 렌더링을 새로해준다
-    하지만 PureComponent 는 class 기반 컴포넌트에서만 사용할 수 있다.
-*/
-class RenderTest extends PureComponent {
+import React, { Component } from "react";
+class RenderTest extends Component {
   state = {
-    counter: 0,
+    state: `waiting`,
+    message: `클릭해서 시작하세요`,
+    result: [],
   };
 
-  /* 
-    shouldComponentUpdate()
-    렌더링이 되는 경우를 설정해줘야한다.
-    => 최적화 관련 
-    true 일 경우 render false일 경우 render X 
-  
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (this.state.counter !== nextState.counter) {
-            return true;
-            }
-            return false;
-        }
-*/
+  colorChange = () => {
+    setTimeout(() => {
+      this.setState({
+        state: "now",
+        message: "지금 클릭",
+      });
+    }, Math.floor(Math.random() * 3000) + 2000); // 2~5초 랜덤
+  };
 
-  counterIncrease = (e) => {
-    e.preventDefault();
-    this.setState({});
+  startTime;
+  endTime;
+
+  // waiting -> ready -> now 의 경우를 나눠서 처리
+  onClickScreen = () => {
+    const { state, result, message } = this.state;
+    if (state === "waiting") {
+      this.setState({
+        state: "ready",
+        message: "초록색이 되면 클릭하세요",
+      });
+      this.colorChange();
+      this.startTime = new Date().getTime();
+    } else if (state === "ready") {
+      clearTimeout(this.colorChange);
+      this.setState({
+        state: "waiting",
+        message: "너무 성급하시군요! 초록색이 된 후에 클릭하세요",
+      });
+    } else if (state === "now") {
+      this.endTime = new Date().getTime();
+      this.setState((prevState) => {
+        return {
+          state: "waiting",
+          message: "클릭해서 시작하세요",
+          result: [...prevState.result, this.endTime - this.startTime],
+        };
+      });
+    }
+  };
+
+  onReset = () => {
+    this.setState({
+      result: [],
+    });
+  };
+
+  renderAverage = () => {
+    const { result } = this.state;
+    return result.length === 0 ? null : (
+      <div>
+        평균시간 : {result.reduce((a, c) => a + c) / result.length} ms
+        <button onClick={this.onReset}>리셋</button>
+      </div>
+    );
   };
 
   render() {
-    {
-      console.log("렌더링", this.state.counter);
-    }
+    const { state, message } = this.state;
     return (
       <>
-        <button onClick={this.counterIncrease}>클릭</button>
+        <div id="screen" className={state} onClick={this.onClickScreen}>
+          {message}
+        </div>
+        {this.renderAverage()}
       </>
     );
   }
