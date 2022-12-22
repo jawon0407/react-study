@@ -8,7 +8,7 @@ const getNumbers = () => {
     const chosen = candidate.splice(
       Math.floor(Math.random() * candidate.length),
       1
-    )[0]; // [0] : 배열에서 뽑아온 숫자 안 쓰면 배열로 뽑아옴
+    )[0]; // [0] : 배열에서 뽑아온 숫자 안 쓰면 배열로 뽑아옴 splice 로 기존 배열 수정해서 동일 숫자 뽑기 금지
     console.log(chosen);
     array.push(chosen);
   }
@@ -25,7 +25,7 @@ const NumberBaseball = () => {
     e.preventDefault();
     if (value === answer.join("")) {
       setResult("홈런"),
-        setTries((prevTries) => [...prevTries, { try: value, result: "홈런" }]),
+      setTries((prevTries) => [...prevTries, { try: value, result: "홈런" }]),
         // [...prevTries, {try: value, result: '홈런'}] : 기존 배열에 새로운 배열을 추가 array.push 는 기존 배열을 수정하기 때문에 배열 변화가 감지되지 않아 화면이 바뀌지 않는다
         alert(`정답입니다 게임을 새로 시작합니다!`);
       setValue("");
