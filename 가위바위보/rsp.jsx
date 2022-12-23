@@ -1,16 +1,41 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 class Rsp extends Component {
-    state = {
+  state = {
+    handShape: ["가위", "바위", "보"],
+    value: "",
+    tries: [],
+  };
 
-    }
-    render(){
-        return (
-            <>
-                <div>가위바위보</div>
-            </>
-        )
-    }
+    onClickBtn = (value) => {
+        
+
+  render() {
+    const {result, score, imgCoord} = this.state;
+    return (
+      <>
+        <div
+          id="computer"
+          style={{
+            background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0`,
+          }}
+        />
+        <div>
+          <button id="rock" className="btn" onClick={onClickBtn("바위")}>
+            바위
+          </button>
+          <button id="scissor" className="btn" onClick={onClickBtn("가위")}>
+            가위
+          </button>
+          <button id="paper" className="btn" onClick={onClickBtn("보")}>
+            보
+          </button>
+        </div>
+        <div>{result}</div>
+        <div>현재 {score}점</div>
+      </>
+    );
+  }
 }
 
 export default Rsp;

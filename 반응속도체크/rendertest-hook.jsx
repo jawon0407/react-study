@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 const RenderTestHook = () => {
   const [state, setState] = useState("waiting");
   const [message, setMessage] = useState("클릭해서 시작하세요");
@@ -6,11 +6,10 @@ const RenderTestHook = () => {
   const startTime = useRef();
   const endTime = useRef();
 
-
   const colorChange = () => {
     setTimeout(() => {
-        setState("now");
-        setMessage("지금 클릭");
+      setState("now");
+      setMessage("지금 클릭");
     }, Math.floor(Math.random() * 3000) + 2000); // 2~5초 랜덤
   };
 
@@ -18,23 +17,25 @@ const RenderTestHook = () => {
   const onClickScreen = () => {
     if (state === "waiting") {
       setState("ready");
-      setNessage("초록색이 되면 클릭하세요"),
-      colorChange();
+      setNessage("초록색이 되면 클릭하세요"), colorChange();
       startTime.current = new Date().getTime();
     } else if (state === "ready") {
       clearTimeout(colorChange);
-        setState("waiting");
-        setMessage("너무 성급하시군요! 초록색이 된 후에 클릭하세요");
+      setState("waiting");
+      setMessage("너무 성급하시군요! 초록색이 된 후에 클릭하세요");
     } else if (state === "now") {
       endTime.current = new Date().getTime();
-          setState("waiting");
-          setMessage("클릭해서 시작하세요");
-          setResult((prevResult)=>([...prevResult, endTime.current - startTime.current]));
-      }
+      setState("waiting");
+      setMessage("클릭해서 시작하세요");
+      setResult((prevResult) => [
+        ...prevResult,
+        endTime.current - startTime.current,
+      ]);
     }
+  };
 
   const onReset = () => {
-      setResult([]);
+    setResult([]);
   };
 
   const renderAverage = () => {
@@ -46,14 +47,14 @@ const RenderTestHook = () => {
     );
   };
 
-    return (
-      <>
-        <div id="screen" className={state} onClick={onClickScreen}>
-          {message}
-        </div>
-        {renderAverage()}
-      </>
-    );
-}
+  return (
+    <>
+      <div id="screen" className={state} onClick={onClickScreen}>
+        {message}
+      </div>
+      {renderAverage()}
+    </>
+  );
+};
 
 export default RenderTestHook;
