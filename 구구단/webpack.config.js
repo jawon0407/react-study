@@ -16,22 +16,19 @@ module.exports = {
             test : /\.jsx?/,
             loader : 'babel-loader',
             options : {
-                presets : [
-                    ['@babel/preset-env',{
-                        targets : {
-                            browsers : ["1% in KR", "last 2 chrome versions"],
-                        },
-                        debug : true,
-                    }], 
-                    '@babel/preset-react'
-                ]
+                presets : [['@babel/preset-env',{
+                    targets : {
+                        browsers : ['> 1% in KR', 'last 2 chrome versions'],
+                        }
+                    }],
+                '@babel/preset-react'],
+                plugins : [
+                    'react-refresh/babel'
+                ],
             },
-            plugins : [
-                'react-refresh/babel'
-            ]
+            exclude : path.join(__dirname, 'node_modules'),
         }]
     },
-    exclude : path.join(__dirname, 'node_modules'),
     plugins : [
         new RefreshWebpackPlugin(),
     ],
