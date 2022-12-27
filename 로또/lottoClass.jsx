@@ -23,7 +23,7 @@ class Lotto extends Component {
 
     timeouts = [];
 
-    componentDidMount(){
+    runTimeouts = () => {
         const { winNumbers } = this.state;
         for(let i=0; i< winNumbers.length - 1; i++){
             this.timeouts[i] = setTimeout(()=>{
@@ -34,12 +34,25 @@ class Lotto extends Component {
                 })
             },(i+1) * 1000);
         }
-        setTimeout(()=>{
+        this.timeouts[6] = setTimeout(() => {
             this.setState({
-                bonus : winNumbers[6],
-                redo : true,
-            })
-        },7000);
+              bonus: winNumbers[6],
+              redo: true,
+            });
+          }, 7000);
+    }
+
+    componentDidMount(){
+        this.runTimeouts();
+    }
+    
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.redo === false && prevState.redo === true){
+            //조건문을 사용하여 Redo 버튼을 누르면 다시 실행되도록 한다.
+            //didMount 실행 -> didUpdate 매번 실팽
+            //상황에 맞게 조건문을 사용해야함  
+            this.runTimeouts();
+        }
     }
 
     componentWillUnmount(){
