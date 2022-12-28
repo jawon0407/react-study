@@ -1,4 +1,4 @@
-import React , {useState, useRef, useEffect} from 'react';
+import React , {useState, useRef, useEffect, useMemo, useCallback} from 'react';
 
 const getNumbers = () => {
     const candidate = Array(45).fill().map((v,i) => i + 1);
@@ -12,11 +12,15 @@ const getNumbers = () => {
 }
 
 const Lotto = () => {
-    const [winNumbers, setWinNumbers] = useState(getNumbers());
+    const lottoNumbers = useMemo(() => {getNumbers()},[]);
+    //useMemo는 복잡한 함수 결과'값'을 기억한다,[]안에 있는 값이 바뀔때만 함수를 다시 실행한다.
+    // hooks 는 전체 함수가 다시 실행되기 때문에 최적화를 위해서 함수가 반복될 땐 useMemo를 사용한다.
+    const [winNumbers, setWinNumbers] = useState(lottoNumbers);
     const [winBalls, setWinBalls] = useState([]);
     const [bonus, setBonus] = useState(null);
     const [redo, setRedo] = useState(false);
     const timeouts = useRef([]);
+    //useRef는 일반 값을 기억한다, .current로 접근한다.
     
     useEffect(()=>{
         console.log('useEffect');
@@ -39,13 +43,14 @@ const Lotto = () => {
     //[] 빈 배열을 넣으면 componentDidMount와 동일
     //배열에 요소를 넣으면 componentDidMount와 componentDidUpdate 둘 다 수행
 
-    const onClickRedo = () => {
+    const onClickRedo = useCallback(() => {
         setWinNumbers(getNumbers());
         setWinBalls([]);
         setBonus('');
         setRedo(true);
         timeouts.current = [];
-    };
+    });
+    //useCallback은 함수 자체를 기억한다
 
 
     return(
@@ -63,4 +68,4 @@ const Lotto = () => {
     )
 }
 
-export default Lotto;
+export default Lotto;`

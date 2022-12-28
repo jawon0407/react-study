@@ -7,15 +7,37 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="div">
-        
-    </div>
+    <h1>riot api</h1>
+    <form method="POST">
+        <input type="text" id="summonerName" name="summonerName" placeholder="소환사명을 입력하세요.">
+        <input type="submit" value="검색">
+    </form>
 </body>
 <script>
-    const div = document.querySelector('.div');
-    const innerTextAdjust = (el) => {
-        el.innerText = '가위';
+    //riot api 를 사용한 소환사 검색
+    //riot api key : RGAPI-8d546747-6f82-4e47-8e73-16a427137681
+    //riot api url : https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}
+
+    //input 태그의 value 값을 가져오는 방법
+    //1. input 태그의 name 값의 value를 가져온다.
+
+    
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const summonerName = document.querySelector("#summonerName").value;
+        console.log(summonerName);
+        //fetch 를 사용한 api 호출
+        const KEY = "RGAPI-8d546747-6f82-4e47-8e73-16a427137681";
+        const url = `https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${KEY}`;
+        //fetch 를 사용한 api 호출
+        try{fetch(url)
+            .then((res) => res.json())
+            .then((data) => console.log(data))
+        }catch{
+            console.log("error");
+        }
     }
-    innerTextAdjust(div);
+
+    document.querySelector('form').addEventListener('submit', onSubmit);
 </script>
 </html>
