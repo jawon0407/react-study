@@ -1,5 +1,4 @@
 import React, { useState , useRef ,  useEffect} from "react";
-import useInterval from "./useInterval";
 
 const rspCoords = {
   바위: "0",
@@ -9,7 +8,7 @@ const rspCoords = {
 
 const scores = {
     가위: 1,
-    바위: 0,W
+    바위: 0,
     보: -1,
 }
 const computerChoice = (imgCoord) => {

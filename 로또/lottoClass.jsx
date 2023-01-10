@@ -29,7 +29,7 @@ class Lotto extends Component {
             this.timeouts[i] = setTimeout(()=>{
                 this.setState((prevState) => {
                     return{
-                        winBalls : [...prevState.winBalls, prevState.winNumbers[i]],
+                        winBalls : [...prevState.winBalls, winNumbers[i]],
                     }
                 })
             },(i+1) * 1000);
@@ -52,6 +52,11 @@ class Lotto extends Component {
             //didMount 실행 -> didUpdate 매번 실팽
             //상황에 맞게 조건문을 사용해야함  
             this.runTimeouts();
+        }
+        if(this.state.winNumbers !== prevState.winNumbers){
+            console.log(this.state.winNumbers);
+            console.log(prevState.winNumbers);
+            console.log('로또 숫자를 생성합니다.');
         }
     }
 
